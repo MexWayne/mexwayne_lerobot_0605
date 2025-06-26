@@ -416,3 +416,12 @@ Additionally, if you are using any of the particular policy architecture, pretra
 ## How build your robot
 https://wiki.seeedstudio.com/cn/lerobot_so100m/#%E6%9C%BA%E6%A2%B0%E8%87%82%E7%BB%84%E8%A3%85
 
+
+## Tips:
+# 1 change the mod for port
+the actaul port mod we need is higher than 666 so the "sudo chmod 666 /dev/ttyACM0" should be 777
+
+# 2 the micro port on the motor
+the every port on the motor can be used to set the ID
+
+

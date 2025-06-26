@@ -411,3 +411,8 @@ Additionally, if you are using any of the particular policy architecture, pretra
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=huggingface/lerobot&type=Timeline)](https://star-history.com/#huggingface/lerobot&Timeline)
+
+
+## How build your robot
+https://wiki.seeedstudio.com/cn/lerobot_so100m/#%E6%9C%BA%E6%A2%B0%E8%87%82%E7%BB%84%E8%A3%85
+

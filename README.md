@@ -435,13 +435,13 @@ step3: click the "搜索" and find your motors with their IDs shown in the pannl
 ![alt text](docs/readme_tips_img/tip3/59e8c6f78e02e7b62c5bb2467b50879.png)
 step4: chose the error motor, for example here the motor ID6 goes error
        move the error to the 90 deg postion
-![alt text](0docs/readme_tips_img/tip3/661ac0f7916e413d9b68bacdf1f890.png)
+![alt text](docs/readme_tips_img/tip3/0661ac0f7916e413d9b68bacdf1f890.png)
 step5: chose the "编程"
 ![alt text](docs/readme_tips_img/tip3/0b1e4d254fbe25bd13b3a5a0092fa96.png)
 step6： click the "中位校准"
-![alt text](6docs/readme_tips_img/tip3/c3123b6a9a0e9e363c2c1d558dd96c.png)
+![alt text](docs/readme_tips_img/tip3/6c3123b6a9a0e9e363c2c1d558dd96c.png)
 then：
-![alt text](cdocs/readme_tips_img/tip3/b40b0c03be1f18e97329153f3efa50.png)
+![alt text](docs/readme_tips_img/tip3/cb40b0c03be1f18e97329153f3efa50.png)
 step7:remove the calibration data that have already gernerate :
 ![alt text](docs/readme_tips_img/tip3/208a969b1e999285ba6a472f4bd2520.png)
 step8:

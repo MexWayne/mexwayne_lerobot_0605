@@ -448,3 +448,36 @@ step8:
 retry the calibration process then the problem gone
 
 
+
+# 4 how to replay the episode
+if we use the command line like this:
+python lerobot/scripts/control_robot.py \
+  --robot.type=so101 \
+  --control.type=replay \
+  --control.fps=30 \
+  --control.repo_id=${HF_USER}/so101_test \
+  --control.episode=0
+
+如果你将数据保存在本地，请添加--control.local_files_only=true .
+
+the results will goes error
+first, there is no control.local_files_only=true item for user to set.
+second, if we have not defined the "root" path, the program will always find the huggingface online repo
+thrid, if we use the "~" in the root path, the code can not transfor it into the "/home/your_user_name"
+fourth, though we use the local dataset, the repo id still should be defined or it will throw out the error by the code
+
+
+so the correct command line should be:
+python lerobot/scripts/control_robot.py   
+--robot.type=so100     \  
+--control.type=replay  \ 
+--control.fps=30       \ 
+--control.repo_id=wzx_pick_up_cube0/so100_pick_up_cube  \
+--control.episode=0  
+--control.root=/home/aiisp/.cache/huggingface/lerobot/wzx_pick_up_cube0/so100_pick_up_cube
+
+
+
+
+
+

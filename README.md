@@ -450,6 +450,7 @@ retry the calibration process then the problem gone
 
 
 # 4 how to replay the episode
+Q:
 if we use the command line like this:
 python lerobot/scripts/control_robot.py \
   --robot.type=so101 \
@@ -460,6 +461,7 @@ python lerobot/scripts/control_robot.py \
 
 如果你将数据保存在本地，请添加--control.local_files_only=true .
 
+A:
 the results will goes error
 first, there is no control.local_files_only=true item for user to set.
 second, if we have not defined the "root" path, the program will always find the huggingface online repo
@@ -475,6 +477,21 @@ python lerobot/scripts/control_robot.py
 --control.repo_id=wzx_pick_up_cube0/so100_pick_up_cube  \
 --control.episode=0  
 --control.root=/home/aiisp/.cache/huggingface/lerobot/wzx_pick_up_cube0/so100_pick_up_cube
+
+
+# 5 how to visiualize your data in local path
+Q:
+if we use the command line like this:
+python lerobot/scripts/visualize_dataset_html.py \
+  --repo-id seeed_123/so101_test \
+
+the program will show error that the online bugging face repo can not reach
+
+A:
+the root should be add here for if the code find the root is set, the whole program will find the root path not the online huggingface repo
+
+python lerobot/scripts/visualize_dataset_html.py  --repo-id=wzx_pick_up_cube0/so100_pick_up_cube0 --root=/home/aiisp/.cache/huggingface/lerobot/wzx_pick_up_cube0/so100_pick_up_cube
+
 
 
 

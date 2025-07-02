@@ -445,6 +445,10 @@ then：
 step7:remove the calibration data that have already gernerate :
 ![alt text](docs/readme_tips_img/tip3/208a969b1e999285ba6a472f4bd2520.png)
 step8:
+remove the former calibration data in
+.cache/calibration/so100
+if the former calibration data is not been removed, the error still show up
+step9:
 retry the calibration process then the problem gone
 
 

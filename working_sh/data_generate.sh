@@ -1,0 +1,13 @@
+python lerobot/scripts/control_robot.py \
+  --robot.type=so100 \
+  --control.type=record \
+  --control.fps=30 \
+  --control.single_task="pick up all the cubes on the box." \
+  --control.repo_id=wzx_pick_up_cube8/so100_pick_up_cube \
+  --control.tags='["so100","tutorial"]' \
+  --control.warmup_time_s=5 \
+  --control.episode_time_s=30 \
+  --control.reset_time_s=30 \
+  --control.num_episodes=4 \
+  --control.display_data=true \
+  --control.push_to_hub=false

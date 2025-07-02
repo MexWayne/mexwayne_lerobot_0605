@@ -1,0 +1,13 @@
+python lerobot/scripts/control_robot.py \
+  --robot.type=so100 \
+  --control.type=record \
+  --control.fps=30 \
+  --control.single_task="pick up all the cubes on the box." \
+  --control.repo_id="eval_wzx_pick_up_cube1/eval_so100_pick_up_cube" \
+  --control.tags='["tutorial"]' \
+  --control.warmup_time_s=5 \
+  --control.episode_time_s=30 \
+  --control.reset_time_s=30 \
+  --control.num_episodes=10 \
+  --control.push_to_hub=false \
+  --control.policy.path="outputs/train/act_so100_test/checkpoints/060000/pretrained_model"

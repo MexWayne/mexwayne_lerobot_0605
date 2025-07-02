@@ -52,6 +52,9 @@ from lerobot.configs import parser
 from lerobot.configs.train import TrainPipelineConfig
 from lerobot.scripts.eval import eval_policy
 
+from pathlib import Path
+from safetensors.torch import load_file
+
 
 def update_policy(
     train_metrics: MetricsTracker,
@@ -149,6 +152,25 @@ def train(cfg: TrainPipelineConfig):
 
     if cfg.resume:
         step, optimizer, lr_scheduler = load_training_state(cfg.checkpoint_path, optimizer, lr_scheduler)
+
+    if cfg.policy.resume_from_checkpoint:
+        ckpt_path = Path(cfg.policy.resume_from_checkpoint) 
+        logging.info(f"Resuming training from checkpoint: {ckpt_path}")
+
+        # load checkpoint
+        weights = load_file(ckpt_path / "pretrained_model" / "model.safetensors")
+        policy.load_state_dict(weights)
+
+        # load optimzer, scheduler, step
+        if cfg.policy.load_optimizer_state:
+            step, optimizer, lr_scheduler = load_training_state(ckpt_path, optimizer, lr_scheduler)
+
+            # update the steps
+            if step >= cfg.steps:
+                cfg.steps = cfg.steps + 100000
+        else:
+            step = 0
+    
 
     num_learnable_params = sum(p.numel() for p in policy.parameters() if p.requires_grad)
     num_total_params = sum(p.numel() for p in policy.parameters())

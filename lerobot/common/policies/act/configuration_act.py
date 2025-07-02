@@ -137,6 +137,10 @@ class ACTConfig(PreTrainedConfig):
     optimizer_weight_decay: float = 1e-4
     optimizer_lr_backbone: float = 1e-5
 
+    # resume train
+    resume_from_checkpoint: str | None = None
+    load_optimizer_state : bool = True
+
     def __post_init__(self):
         super().__post_init__()
 

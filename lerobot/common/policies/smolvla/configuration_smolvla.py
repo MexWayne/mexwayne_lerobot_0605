@@ -101,6 +101,10 @@ class SmolVLAConfig(PreTrainedConfig):
     min_period: float = 4e-3  # sensitivity range for the timestep used in sine-cosine positional encoding
     max_period: float = 4.0
 
+    # resume train
+    resume_from_checkpoint: str | None = None
+    load_optimizer_state : bool = True
+
     def __post_init__(self):
         super().__post_init__()
 

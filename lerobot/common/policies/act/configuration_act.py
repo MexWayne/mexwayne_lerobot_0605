@@ -93,7 +93,7 @@ class ACTConfig(PreTrainedConfig):
     # Input / output structure.
     n_obs_steps: int = 1
     chunk_size: int = 100
-    n_action_steps: int = 100
+    n_action_steps: int = 1
 
     normalization_mapping: dict[str, NormalizationMode] = field(
         default_factory=lambda: {
@@ -109,16 +109,16 @@ class ACTConfig(PreTrainedConfig):
     pretrained_backbone_weights: str | None = "ResNet18_Weights.IMAGENET1K_V1"
     replace_final_stride_with_dilation: int = False
     # Transformer layers.
-    pre_norm: bool = False
+    pre_norm: bool = True 
     dim_model: int = 512
     n_heads: int = 8
     dim_feedforward: int = 3200
     feedforward_activation: str = "relu"
-    n_encoder_layers: int = 4
+    n_encoder_layers: int = 6 
     # Note: Although the original ACT implementation has 7 for `n_decoder_layers`, there is a bug in the code
     # that means only the first layer is used. Here we match the original implementation by setting this to 1.
     # See this issue https://github.com/tonyzhaozh/act/issues/25#issue-2258740521.
-    n_decoder_layers: int = 1
+    n_decoder_layers: int = 6 
     # VAE.
     use_vae: bool = True
     latent_dim: int = 32
@@ -126,7 +126,7 @@ class ACTConfig(PreTrainedConfig):
 
     # Inference.
     # Note: the value used in ACT when temporal ensembling is enabled is 0.01.
-    temporal_ensemble_coeff: float | None = None
+    temporal_ensemble_coeff: float | None = 0.01 
 
     # Training and loss computation.
     dropout: float = 0.1

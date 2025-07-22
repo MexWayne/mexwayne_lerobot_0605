@@ -314,7 +314,9 @@ def record(
         if not events["stop_recording"] and (
             (recorded_episodes < cfg.num_episodes - 1) or events["rerecord_episode"]
         ):
-            log_say("Reset the environment", cfg.play_sounds)
+            log_say("==============================================================================================", cfg.play_sounds)
+            log_say(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Reset the environment <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<", cfg.play_sounds)
+            log_say("==============================================================================================", cfg.play_sounds)
             reset_environment(robot, events, cfg.reset_time_s, cfg.fps)
 
         if events["rerecord_episode"]:

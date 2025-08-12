@@ -8,5 +8,5 @@
 
 
 python lerobot/scripts/visualize_dataset_html.py \
---repo-id=wzx_move_box0/so100_move_box \
---root=/home/aiisp/.cache/huggingface/lerobot/wzx_move_box0/so100_move_box
+    --repo-id=jhy_pick_up_the_packaging_box_and_put_it_on_the_plate_2/so100_pick_up_the_packaging_box_and_put_it_on_the_plate_2 \
+    --root=/home/aiisp/.cache/huggingface/lerobot/jhy_pick_up_the_packaging_box_and_put_it_on_the_plate_2/so100_pick_up_the_packaging_box_and_put_it_on_the_plate_2 

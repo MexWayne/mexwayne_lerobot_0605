@@ -2,15 +2,15 @@ python lerobot/scripts/control_robot.py \
   --robot.type=so100 \
   --control.type=record \
   --control.fps=30 \
-  --control.single_task="pick up cube to the plate" \
-  --control.repo_id="eval_pick_up_cube_to_the_plate7/eval_so100_pick_up_cube_to_the_plate" \
+  --control.single_task="pick up the packaging box and put it on the plate" \
+  --control.repo_id="eval_jhy_pick_up_the_packaging_box_and_put_it_on_the_plate_2/eval_so100_pick_up_the_packaging_box_and_put_it_on_the_plate" \
   --control.tags='["tutorial"]' \
   --control.warmup_time_s=5 \
-  --control.episode_time_s=8 \
-  --control.reset_time_s=10 \
-  --control.num_episodes=8 \
+  --control.episode_time_s=30 \
+  --control.reset_time_s=3 \
+  --control.num_episodes=4 \
   --control.push_to_hub=false \
-  --control.policy.path="outputs/train/act_so100_test_pick_up_red_cube_on_the_yellow_plate/checkpoints/100000/pretrained_model"
+  --control.policy.path="outputs/train/jhy_act_so100_train_pick_up_the_packaging_box_and_put_it_on_the_plate_2_resume_from_cube/checkpoints/200000/pretrained_model"
 
 
 

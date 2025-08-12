@@ -159,10 +159,6 @@ class DiffusionConfig(PreTrainedConfig):
     scheduler_name: str = "cosine"
     scheduler_warmup_steps: int = 500
 
-    # resume train
-    resume_from_checkpoint: str | None = None
-    load_optimizer_state : bool = True
-
 
     def __post_init__(self):
         super().__post_init__()

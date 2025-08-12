@@ -60,6 +60,11 @@ class PreTrainedConfig(draccus.ChoiceRegistry, HubMixin, abc.ABC):
     # automatic gradient scaling is used.
     use_amp: bool = False
 
+
+    # resume train
+    resume_from_checkpoint: str | None = None
+    load_optimizer_state : bool = True
+
     def __post_init__(self):
         self.pretrained_path = None
         if not self.device or not is_torch_device_available(self.device):

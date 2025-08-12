@@ -290,6 +290,12 @@ def record(
     if has_method(robot, "teleop_safety_stop"):
         robot.teleop_safety_stop()
 
+
+    log_say("==============================================================================================", cfg.play_sounds)
+    log_say(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Start Recording <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<", cfg.play_sounds)
+    log_say("==============================================================================================", cfg.play_sounds)
+
+
     recorded_episodes = 0
     while True:
         if recorded_episodes >= cfg.num_episodes:

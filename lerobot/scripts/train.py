@@ -55,6 +55,9 @@ from lerobot.scripts.eval import eval_policy
 from pathlib import Path
 from safetensors.torch import load_file
 
+#; added by hengyu jiang
+#; for system resources debug
+import psutil
 
 def update_policy(
     train_metrics: MetricsTracker,
@@ -252,6 +255,16 @@ def train(cfg: TrainPipelineConfig):
 
         if is_log_step:
             logging.info(train_tracker)
+            #; [added by hengyujiang start]
+            #; for system resource debug
+            gpu_mem_allocated_MB = torch.cuda.memory_allocated() / 1024.0 / 1024.0
+            gpu_mem_cached_MB = torch.cuda.memory_reserved() / 1024.0 / 1024.0
+            cpu_mem_used_MB = psutil.virtual_memory().used / 1024.0 / 1024.0
+            cpu_mem_total_MB = psutil.virtual_memory().total / 1024.0 / 1024.0
+            logging.info(f"cpu mem used: {cpu_mem_used_MB:.2f} / {cpu_mem_total_MB:.2f} MB")
+            logging.info(f"gpu mem allocated {gpu_mem_allocated_MB:.2f} MB, reserved {gpu_mem_cached_MB:.2f} MB")
+            #; [added by hengyujiang end]
+             
             if wandb_logger:
                 wandb_log_dict = train_tracker.to_dict()
                 if output_dict:

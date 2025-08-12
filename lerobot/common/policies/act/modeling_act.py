@@ -38,6 +38,20 @@ from lerobot.common.policies.normalize import Normalize, Unnormalize
 from lerobot.common.policies.pretrained import PreTrainedPolicy
 
 
+# for heat map debug use
+DEBUG_FLAG = True
+
+if DEBUG_FLAG:
+    import os
+    import cv2 as cv
+    from lerobot.common.utils.heat_map_tools import feature_map2heat_map
+
+    # where to save the generated heat maps
+    output_dir: str = "eval_jhy_pick_up_the_cube_and_put_it_on_the_plate/eval_so100_pick_up_the_cube_and_put_it_on_the_plate_debug"
+    output_dir = os.path.join("/home/aiisp/.cache/huggingface/lerobot", output_dir, "heat_maps") 
+    os.makedirs(output_dir, exist_ok=True)
+
+
 class ACTPolicy(PreTrainedPolicy):
     """
     Action Chunking Transformer Policy as per Learning Fine-Grained Bimanual Manipulation with Low-Cost
@@ -115,6 +129,12 @@ class ACTPolicy(PreTrainedPolicy):
         queue is empty.
         """
         self.eval()
+
+        # copy the original observations before normalization
+        # no grad, on cpu, to numpy
+        # unsigned int8
+        if DEBUG_FLAG:        
+            batch["src_observation.images"] = [(batch[key]*255.0).detach().cpu().numpy().astype(np.uint8) for key in self.config.image_features]
 
         batch = self.normalize_inputs(batch)
         if self.config.image_features:
@@ -487,8 +507,19 @@ class ACT(nn.Module):
             all_cam_pos_embeds = []
 
             # For a list of images, the H and W may vary but H*W is constant.
-            for img in batch["observation.images"]:
+            if DEBUG_FLAG:
+                # [(w, h, c) (w, h, c)]
+                left_right_heat_maps: list[np.ndarray] = []
+            for idx, img in enumerate(batch["observation.images"]):
+            
                 cam_features = self.backbone(img)["feature_map"]
+
+                if DEBUG_FLAG:
+                    left_right_heat_maps.append(feature_map2heat_map(
+                        feature_map=cam_features[0].detach().cpu().numpy(), 
+                        image_rgb=batch["src_observation.images"][idx][0],
+                    ))
+
                 cam_pos_embed = self.encoder_cam_feat_pos_embed(cam_features).to(dtype=cam_features.dtype)
                 cam_features = self.encoder_img_feat_input_proj(cam_features)
 
@@ -498,6 +529,16 @@ class ACT(nn.Module):
 
                 all_cam_features.append(cam_features)
                 all_cam_pos_embeds.append(cam_pos_embed)
+
+            if DEBUG_FLAG:
+                # [(w, h, c) (w, h, c)] => (w*2, h, c)
+                left_and_right_heat_maps = np.hstack(left_right_heat_maps)
+                # use number of items in directory as frame ID
+                frame_cnt = len(os.listdir(output_dir))
+                heat_map_savepath = os.path.join(
+                    output_dir, f"resnet_lastlayer-frame_{frame_cnt}.png"
+                )
+                cv.imwrite(heat_map_savepath, cv.cvtColor(left_and_right_heat_maps, cv.COLOR_RGB2BGR))
 
             encoder_in_tokens.extend(torch.cat(all_cam_features, axis=0))
             encoder_in_pos_embed.extend(torch.cat(all_cam_pos_embeds, axis=0))

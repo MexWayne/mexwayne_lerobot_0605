@@ -41,17 +41,3 @@ def feature_map2heat_map(feature_map: Union[np.ndarray, torch.Tensor],
     heat_map_rgb = cv.addWeighted(image_rgb, 0.3, feature_map, 0.7, 0)
 
     return heat_map_rgb
-
-
-@DeprecationWarning
-def generate_heat_map_and_save(feature_map: Union[np.ndarray, torch.Tensor], 
-                               image_rgb: Union[np.ndarray, torch.Tensor], 
-                               heat_map_savepath: str) -> None:
-    heat_map_rgb = feature_map2heat_map(feature_map, image_rgb)
-    os.makedirs(os.path.dirname(heat_map_savepath), exist_ok=True)
-    cv.imwrite(heat_map_savepath, cv.cvtColor(heat_map_rgb, cv.COLOR_RGB2BGR))
-    
-
-# todo
-# copy the text_image_heat_map function to here
-...
